@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			canvas{
+				border: 2px solid goldenrod;
+				display: block;
+				margin: 0 auto;
+				cursor: crosshair;
+			}
+			h3{
+				position: relative;
+				top: -550px;
+				left: 50px;
+			}
+			button{
+				position: relative;
+				top: -550px;
+				left: 50px;
+			}
+			
+			
+			
+			
+		</style>
+		
+	</head>
+	<body>
+		<canvas id="demo" width="600" height="600"></canvas>
+		<h3>请选择笔触颜色！</h3>
+		<button>红色</button>
+		<button>绿色</button>
+		<button>蓝色</button>
+		<button>橙色</button>
+		
+		
+		<script type="text/javascript">
+			var canvas=document.querySelector("canvas");
+			var contest=canvas.getContext("2d");
+			var flag=false;
+			var button=document.querySelectorAll("button");
+			button[0].onclick=function(){
+				contest.strokeStyle="red";
+			}
+			button[1].onclick=function() {
+				contest.strokeStyle="green";
+			}
+			button[2].onclick=function() {
+				contest.strokeStyle="blue";
+			}
+			button[3].onclick=function() {
+				contest.strokeStyle="orange";
+			}
+			
+			
+			//鼠标按下
+			canvas.onmousedown=function(e) {
+				e=window.event||e;
+				var startX=e.pageX-this.offsetLeft;
+				var startY=e.pageY-this.offsetTop;
+				contest.beginPath();
+				contest.moveTo(startX,startY);
+				flag=true;
+			}
+			//鼠标移动时绘图
+			canvas.onmousemove=function(e){
+				e=window.event||e;
+				var endX=e.pageX-this.offsetLeft;
+				var endY=e.pageY-this.offsetTop;
+				if(flag==true){
+					contest.lineTo(endX,endY);
+					contest.stroke();
+				}
+			}
+			//鼠标抬起时结束绘图
+			canvas.onmouseup=function() {
+				flag=false;
+			}
+			//鼠标移出canvas的时候结束绘图
+			canvas.onmouseout=function() {
+				flag=false;
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		</script>
+		
+		
+	</body>
+</html>
