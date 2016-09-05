@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>太极</title>
+		<style type="text/css">
+			#myCanvas{
+				border: 1px solid;
+				margin: 0 auto;
+				display: block;
+			}
+			
+			
+			
+		</style>
+	</head>
+	<body>
+		<canvas id="myCanvas" width="600" height="600"></canvas>
+		<script type="text/javascript">
+			var canvas=document.querySelector("#myCanvas");
+			var contest=canvas.getContext("2d");
+			var angle=Math.PI;
+			
+			//加文字
+			contest.beginPath();
+			contest.moveTo(200,60);	
+			contest.font="Bold 60px Arial";
+			contest.fillText("太极图",200,60,400);
+			contest.fillStyle="black";
+			contest.fill();
+		
+			
+			//左半大圆
+			contest.lineWidth=5;
+			contest.beginPath();
+			contest.arc(300,300,200,angle/2,angle*3/2,false);
+			contest.stroke();
+			contest.fillStyle="black";
+			contest.fill();
+			
+			//右半大圆
+			contest.beginPath();
+			contest.arc(300,300,200,angle/2,angle*3/2,true);
+			contest.stroke();
+			contest.fillStyle="white";
+			contest.fill();
+			
+			//上半小圆
+			contest.beginPath();
+			contest.arc(300,200,100,angle/2,angle*3/2,false);
+			contest.stroke();
+			contest.fillStyle="white";
+			contest.fill();
+			
+			//下半小圆
+			contest.lineWidth=0.1;
+			contest.beginPath();
+			contest.arc(300,400,100,angle/2,angle*3/2,true);
+			contest.stroke();
+			contest.fillStyle="black";
+			contest.fill();
+			
+			
+			//黑色内圆
+			contest.beginPath();
+			contest.arc(300,200,20,0,angle*2,false);
+			contest.stroke();
+			contest.fillStyle="black";
+			contest.fill();
+			
+			//白色内圆
+			contest.beginPath();
+			contest.arc(300,400,20,0,angle*2,false);
+			contest.stroke();
+			contest.fillStyle="white";
+			contest.fill();
+
+		</script>
+		
+		
+	</body>
+</html>
