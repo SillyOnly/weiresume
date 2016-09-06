@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			canvas{
+				display: block;
+				border: 1px solid silver;
+				margin: 0 auto;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="mycanvas" width="400" height="400"></canvas>
+		<script type="text/javascript">
+			var canvas=document.querySelector("#mycanvas");
+			var cobj=canvas.getContext("2d");
+			var originx=200;
+			var originy=200;
+			var radius=150;
+			var value=Math.PI;
+			setInterval(function(){
+		
+				
+				//设置渐变色
+				var colorObj=cobj.createRadialGradient(originx,originy,1,originx,originy,100);
+				colorObj.addColorStop(0,"#efefef");
+				colorObj.addColorStop(1,"#cecece");
+				cobj.fillStyle=colorObj;
+				cobj.lineWidth=8;
+				
+				//画圆
+				cobj.beginPath();
+				cobj.strokeStyle=colorObj;
+				cobj.arc(originx,originy,radius,0,2*value,true);
+				cobj.stroke();
+				cobj.fill();
+				
+          
+				
+				function draw(){
+					for(var i=0;i<60;i++){
+						var angle=i*6*Math.PI/180;
+						var lw=2;
+						var radius1=radius-4;
+						if(i%5==0){
+							var radius1=radius-8;
+							var lw=4;
+						}
+						
+						//画刻度
+	                 cobj.strokeStyle="#888";
+	                 cobj.lineWidth=lw;
+	                 cobj.beginPath();
+	                 cobj.moveTo(originx+radius*Math.cos(angle),originy+radius*Math.sin(angle));
+	                 cobj.lineTo(originx+(radius1)*Math.cos(angle),originy+(radius1)*Math.sin(angle));
+	                 cobj.stroke();
+					}
+				}
+				
+				//获取当前时间
+				var date=new Date();
+				var ha=date.getHours()*30+(date.getMinutes()*6/12)-90;
+				var ma=date.getMinutes()*6-90;
+				var sa=date.getSeconds()*6-90;
+				draw();
+				
+				//画分针
+				cobj.strokeStyle="#888";
+				cobj.lineWidth=3;
+				cobj.beginPath();
+				cobj.moveTo(originx,originy);
+				cobj.lineTo(originx+80*Math.cos(ma*Math.PI/180),originy+80*Math.sin(ma*Math.PI/180));
+				cobj.stroke();
+				
+				//画时针
+				cobj.strokeStyle="#000";
+				cobj.lineWidth=4;
+				cobj.beginPath();
+				cobj.moveTo(originx,originy);
+				cobj.lineTo(originx+60*Math.cos(ha*Math.PI/180),originy+60*Math.sin(ha*Math.PI/180));
+				cobj.stroke();
+				
+				//画秒针
+				cobj.strokeStyle="red";
+				cobj.lineWidth=2;
+				cobj.beginPath();
+				cobj.moveTo(originx,originy);
+				cobj.lineTo(originx+110*Math.cos(sa*Math.PI/180),originy+110*Math.sin(sa*Math.PI/180));
+				cobj.stroke();
+				
+				//针中心小圆
+				cobj.strokeStyle="red";
+				cobj.moveTo(originx,originy);
+				cobj.arc(originx,originy,3,0,360,false);
+				cobj.stroke();
+				
+				
+			},1000);
+			
+			
+			
+			
+			
+			
+		</script>
+		
+		
+	</body>
+</html>

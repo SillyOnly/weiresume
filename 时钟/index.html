@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			canvas{
+				display: block;
+				background-color: #ccc;
+				margin: 50px auto;
+			}
+			
+			
+			
+		</style>
+		
+		
+		
+	</head>
+	<body>
+		
+		<canvas id="canvas" width="400" height="400"></canvas>
+		
+		<script type="text/javascript">
+			var canvas=document.querySelector("canvas");
+			var context=canvas.getContext("2d");
+			var originx=200;
+			var originy=200;
+			var radius=100;
+			
+			//设置阴影
+			context.shadowColor="#888";
+			context.shadowOffsetX=1;
+			context.shadowOffsetY=1;
+			context.shadowBlur=3;   //模糊效果
+			
+			
+			//设置渐变
+			var colorcontext=context.createRadialGradient(originx,originy,1,originx,originy,100);
+			colorcontext.addColorStop(0,"#efefef");
+			colorcontext.addColorStop(1,"#cecece");
+			context.fillStyle=colorcontext;
+			context.lineWidth=6;
+			context.strokeStyle=colorcontext;
+			
+			
+			//画圆
+			context.beginPath();
+			context.arc(originx,originy,radius,0,2*Math.PI);
+			context.stroke();
+			
+			
+//			//把刻度的阴影给去掉
+//			context.shadowColor="#888";
+//			context.shadowOffsetX=0;
+//			context.shadowOffsetY=0;
+//			context.shadowBlur=0;   //模糊效果
+			
+			
+			
+			
+			
+			//画刻度  需要用到正余弦函数
+//			var angle=i*6*Math.PI/180;
+			function drawMark(){
+				for(var i=0;i<60;i++){
+				var index=i*6*Math.PI/180;
+				context.lineWidth=3;
+				context.beginPath();
+				context.moveTo(originx+radius*Math.cos(index),originy+radius*Math.sin(index));
+				context.lineTo(originx+(radius-8)*Math.cos(index),originy+(radius-8)*Math.sin(index));
+				context.stroke();
+				
+				}
+			}
+			drawMark();
+			
+			
+		</script>
+		
+		
+		
+		
+	</body>
+</html>
